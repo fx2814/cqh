@@ -1,0 +1,105 @@
+什么是交换机
+交换机是用来连接局域网的主要设备
+ -交换机能够根据以太网帧中目标地址智能的转发数据,
+ 因此交换机工作在数据链路层
+
+交换机的工作原理
+• 学习
+ -MAC地址表是交换机通过学习接收的数据帧的源MAC地址来形成的
+• 广播
+ -如果目标地址在MAC地址表中没有,交换机就向除接收到该数据帧
+的接口外的其他所有接口广播该数据帧
+• 转发
+ -交换机根据MAC地址表单播转发数据帧
+• 更新
+ -交换机MAC地址表的老化时间是300秒
+ -交换机如果发现一个帧的入接口和MAC地址表中源MAC地址的所在
+接口不同,交换机将MAC 地址重新学习到新的接口
+
+VLAN概述
+• 什么是VLAN
+ -Virtual LAN(虚拟局域网)是物理设备上连接的不受物理位置限制的用户的一个逻辑组。
+• 为什么引入VLAN
+ -交换机的所有接口默认属于同一个广播域
+ -随着接入设备的增多,网络中广播增多,降低了网络的效率，为了分割广播域,引入了VLAN
+
+VLAN概述
+• VLAN的作用
+– 广播控制
+– 增加安全性
+– 提高带宽利用
+– 降低延迟
+
+VLAN标识的种类
+• 以太网上实现中继可用两种封装类型
+– ISL(Cisco私有协议)
+– IEEE 802.1Q
+• ISL和802.1Q 的异同
+• 相同点
+– 都是显式标记,即帧被显式标记了VLAN的信息
+• 不同点
+– IEEE 802.1Q是公有的标记方式,ISL是Cisco私有的
+– ISL采用外部标记的方法,802.1Q采用内部标记的方法
+– ISL标记的长度为30字节,802.1Q标记的长度为4字节
+
+以太通道概述
+• 也称为以太接口捆绑、接口聚集或以太链路聚集。英
+文名EtherChannel
+• 以太通道为交换机提供了接口捆绑的技术,允许两个
+交换机之间通过两个或多个接口并行连接,同时传输
+数据,以提供更高的带宽和可靠性
+
+配置以太网通道
+• EtherChannel-以太通道
+– 多条线路负载均衡,带宽提高
+– 容错,当一条线路失效时,其他线路通信,不会丢包
+
+以太通道配置指导原则
+• 参与捆绑的接口必须属于同一个vlan,如果是在中继
+模式下,要求所有参加捆绑的接口都是在中继模式下
+• 如果接口配置的是中继模式,那么应该在链路的两端
+将通道中的所有接口配置成中继模式
+
+
+交换机的工作模式：
+Switch>用户模式
+Switch>enable 
+Switch#特权模式
+Switch#configure  terminal 
+Switch(config)#全局配置模式
+Switch(config)#interface fastEthernet 0/1
+Switch(config-if)#接口模式
+exit返回上一模式
+end直接退到特权模式
+
+命令输入错误被卡住时同时按键盘ctrl+shift+6这三个按键
+
+常用命令：
+Switch(config)#hostname S1修改主机名为S1
+Switch#show  running-config查看配置信息
+
+配置enable明文口令
+1、更改密码
+ -全局配置模式：enable  password  123
+保存交换机的配置
+1、特权： copy  running-config  startup-config
+2、特权：write
+恢复设备出厂默认值
+ -特权：erase  startup-config
+重启：reload
+
+设备配置的准备工作
+空闲一段时间后，重回初始界面的问题
+switch(config)#line con 0
+switch(config-line)#exec-timeout 0 0
+
+配置输出日志同步
+Switch(config)#line console 0
+Switch(config-line)#logging synchronous
+
+禁用DNS查询
+全局模式：no ip domain-lookup
+
+ 
+  
+

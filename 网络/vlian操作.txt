@@ -1,0 +1,24 @@
+vlan操作
+Switch>enable
+Switch#configure terminal
+
+创建 VLAN *
+Switch(config)#vlan * 
+给vlan *更改名字
+Switch(config-vlan)#name *   
+
+查看vlan列表情况
+Switch#show vlan brief 
+
+进入 *接口
+Switch(config)#interface range fastEthernet 0/*  
+将 *接口加入 VLAN*
+Switch(config-if-range)#switchport access vlan *
+
+
+
+  
+
+
+  
+
